@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+/* Accent (brand color) scale → Tailwind 'blue' utilities. */
+@theme inline {
+  --color-blue-50: var(--a-50);
+  --color-blue-100: var(--a-100);
+  --color-blue-200: var(--a-200);
+  --color-blue-300: var(--a-300);
+  --color-blue-400: var(--a-400);
+  --color-blue-500: var(--a-500);
+  --color-blue-600: var(--a-600);
+  --color-blue-700: var(--a-700);
+  --color-blue-800: var(--a-800);
+  --color-blue-900: var(--a-900);
+  --color-blue-950: var(--a-950);
+}
+
+/* ─── Default theme: Blue → dark navy (single identity) ────── */
+:root {
+  --a-50: #eef4ff;
+  --a-100: #dbe6fe;
+  --a-200: #bfd3fe;
+  --a-300: #93b4fd;
+  --a-400: #6090fa;
+  --a-500: #3b6df6;
+  --a-600: #254edb;
+  --a-700: #1d3fc8;
+  --a-800: #1e37ad;
+  --a-900: #1f348e;
+  --a-950: #141e4d;
+
+  --primary: var(--a-700);
+  --primary-strong: var(--a-800);
+  --primary-soft: var(--a-100);
+  --grad-from: var(--a-600);
+  --grad-to: #101b63;
+  --section-tint: var(--a-50);
+  --bg: #f7f9fc;
+
+  --ink: #111a3d;
+  --ink-soft: #4b5573;
+  --paper: #f8fafc;
+  --gold: #f59e0b;
+  --ok: #1f9d63;
+  --bad: #d64545;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Responsive utility fixes (Tailwind v4 extraction misses) ─── */
+@media (min-width: 64rem) {
+  .lg\:hidden { display: none !important; }
+  .lg\:block  { display: block !important; }
+  .lg\:grid   { display: grid !important; }
+  .lg\:flex   { display: flex !important; }
+}
+@media (min-width: 48rem) {
+  .md\:hidden { display: none !important; }
+  .md\:flex   { display: flex !important; }
+  .md\:block  { display: block !important; }
+}
+@media (min-width: 40rem) {
+  .sm\:hidden { display: none !important; }
+  .sm\:flex   { display: flex !important; }
+  .sm\:block  { display: block !important; }
+}
+@media (min-width: 80rem) {
+  .xl\:hidden { display: none !important; }
+  .xl\:flex   { display: flex !important; }
+  .xl\:block  { display: block !important; }
+}
+@media (min-width: 90rem) {
+  .\32xl\:hidden { display: none !important; }
+  .\32xl\:flex   { display: flex !important; }
+}
+
+body {
+  font-family: var(--font-arabic), var(--font-latin), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+/* Refined surface + interactive defaults for a polished product feel */
+:root {
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --line: rgb(15 23 42 / 0.08);
+  --line-strong: rgb(15 23 42 / 0.14);
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-md: 0 8px 24px -12px rgb(15 23 42 / 0.14), 0 2px 8px -4px rgb(15 23 42 / 0.06);
+  --shadow-lg: 0 24px 60px -24px rgb(15 23 42 / 0.22), 0 8px 20px -12px rgb(15 23 42 / 0.10);
+  --shadow-accent: 0 16px 36px -16px rgb(29 78 216 / 0.45);
+}
+
+.bg-surface { background-color: var(--surface); }
+.bg-surface-soft { background-color: var(--surface-soft); }
+.shadow-panel { box-shadow: var(--shadow-md); }
+.shadow-panel-lg { box-shadow: var(--shadow-lg); }
+
+/* Semantic identity utilities */
+.bg-paper {
+  background-color: var(--paper);
+}
+
+.bg-ink {
+  background-color: var(--ink);
+}
+
+.bg-gold {
+  background-color: var(--gold);
+}
+
+.text-ink {
+  color: var(--ink);
+}
+
+.text-ink-soft {
+  color: var(--ink-soft);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.bg-ok {
+  background-color: var(--ok);
+}
+
+.bg-bad {
+  background-color: var(--bad);
+}
+
+/* Dotted divider used inside ink panels */
+.ink-divider {
+  border-color: rgb(255 255 255 / 0.12);
+}
+
+/* Selection */
+::selection {
+  background: var(--primary-soft);
+  color: var(--primary-strong);
+}
+
+/* Hidden scrollbar */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Animations — single intentional entrance for hero strip */
+@keyframes strip-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.strip-in {
+  opacity: 0;
+  animation: strip-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.product-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg), var(--shadow-accent);
+}
+
+/* Accessible interactive focus */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Brand accent */
+.brand-gradient {
+  background-image: linear-gradient(135deg, var(--grad-from) 0%, var(--grad-to) 100%);
+}
+
+.brand-text {
+  background-image: linear-gradient(135deg, var(--grad-from) 0%, var(--grad-to) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft section tint for alternating sections on organized light theme */
+.section-tint {
+  background-color: var(--section-tint);
+}
+
+/* Subtle pattern used behind hero / banners */
+.dot-grid {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.12) 1px, transparent 0);
+  background-size: 26px 26px;
+}
+
+/* Reveal-on-scroll (JS-free fallback: visible by default) */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── New editorial/naval design language ─────────────────── */
+
+/* Outlined "ghost" word for hero display type */
+.ghost-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.9);
+}
+.ghost-text-dim {
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.28);
+}
+
+/* Outlined ghost numeral for light backgrounds */
+.ghost-ink {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(17 26 61 / 0.16);
+}
+
+/* Auto-scrolling marquee band. Track holds two identical halves. */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+[dir='rtl'] .marquee-track {
+  animation-direction: reverse;
+}
+
+/* Gentle floating for hero mockup cards */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+.float-slower {
+  animation: float-y 9s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+/* Tight hero display type treatment */
+.display-tight {
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Editorial overline label (tiny, letterspaced) */
+.overline-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Arabic script must never be letter-spaced — it breaks letter joins */
+[dir='rtl'] .overline-label {
+  letter-spacing: 0;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .float-slow,
+  .float-slower {
+    animation: none;
+  }
+}
+
+/* Sheet-style product card (catalog feel) */
+.card-sheet {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-sheet:hover {
+  transform: translateY(-6px) rotate(-0.4deg);
+  box-shadow: var(--shadow-lg), var(--shadow-accent);
+}
+
+/* Buy bar that slides over cover on hover */
+.buy-reveal {
+  transform: translateY(110%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .buy-reveal {
+  transform: translateY(0);
+}
